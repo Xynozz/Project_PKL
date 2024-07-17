@@ -38,7 +38,7 @@ class PengeluaranController extends Controller
         $kartu = Kartu::all();
         $pengeluaran = Pengeluaran::all();
 
-        return view('pengeluaran.create', compact('kartu', 'pengeluaran'));
+        return view('user.pengeluaran.create', compact('kartu', 'pengeluaran'));
     }
 
     /**

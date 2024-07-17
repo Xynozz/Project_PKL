@@ -39,7 +39,7 @@ class PemasukanController extends Controller
         $pemasukan = Pemasukan::all();
         $kartu = Kartu::all();
 
-        return view('pemasukan.create', compact('pemasukan', 'kartu'));
+        return view('user.pemasukan.create', compact('pemasukan', 'kartu'));
 
     }
 
@@ -54,7 +54,7 @@ class PemasukanController extends Controller
         $validate = $request->validate([
             'jumlah_pemasukan' => 'required',
             'deskripsi' => 'required',
-            'id_kartu' => 'required',
+            'id_kartu' => 'required|nullable',
         ]);
 
         $pemasukan = new Pemasukan();

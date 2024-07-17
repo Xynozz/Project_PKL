@@ -25,7 +25,7 @@ class KartuController extends Controller
         $kartu = Kartu::latest()->get();
         confirmDelete('delete', 'Apakah Anda Yakin?');
 
-        return view('kartu.index', compact('kartu'));
+        return view('home', compact('kartu'));
     }
 
     /**
@@ -36,7 +36,7 @@ class KartuController extends Controller
     public function create()
     {
         $kartu = Kartu::all();
-        return view('kartu.create', compact('kartu'));
+        return view('user.kartu.create', compact('kartu'));
     }
 
     /**
@@ -86,7 +86,7 @@ class KartuController extends Controller
     public function edit($id)
     {
         $kartu = Kartu::findOrFail($id);
-        return view('kartu.edit', compact('kartu'));
+        return view('user.kartu.edit', compact('kartu'));
 
     }
 
@@ -112,7 +112,7 @@ class KartuController extends Controller
         $kartu->save();
         Alert::success('Success ', 'data berhasil diubah')->autoClose(2000);
 
-        return redirect()->route('kartu.index');
+        return redirect()->route('home');
 
     }
 

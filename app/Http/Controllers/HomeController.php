@@ -28,15 +28,32 @@ class HomeController extends Controller
         $kartu = Kartu::all();
         $pemasukan = Pemasukan::all();
         $pengeluaran = Pengeluaran::all();
-        
+
         $saldo = Pemasukan::sum('jumlah_pemasukan') - Pengeluaran::sum('jumlah_pengeluaran');
         $total_pemasukan = Pemasukan::sum('jumlah_pemasukan');
         $total_pengeluaran = Pengeluaran::sum('jumlah_pengeluaran');
 
+        // Prepare data for chart
+        $chartData = [
+            'labels' => [],
+            'pemasukan' => [],
+            'pengeluaran' => [],
+        ];
+
+        foreach ($pemasukan as $p) {
+            $chartData['labels'][] = $p->created_at->format('Y-m-d');
+            $chartData['pemasukan'][] = $p->jumlah_pemasukan;
+        }
+
+        foreach ($pengeluaran as $p) {
+            $chartData['labels'][] = $p->created_at->format('Y-m-d');
+            $chartData['pengeluaran'][] = $p->jumlah_pengeluaran;
+        }
+
         confirmDelete('delete', 'Apakah Anda Yakin?');
 
         return view('home', ['kartu' => $kartu, 'pemasukan' => $pemasukan, 'pengeluaran' => $pengeluaran, 'saldo' => $saldo,
-            'total_pemasukan' => $total_pemasukan, 'total_pengeluaran' => $total_pengeluaran]);
+            'total_pemasukan' => $total_pemasukan, 'total_pengeluaran' => $total_pengeluaran, 'chartData' => $chartData]);
 
     }
 }

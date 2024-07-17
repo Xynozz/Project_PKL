@@ -23,6 +23,23 @@
                         <td>{{$item->username}}</td>
                         <td>{{$item->email}}</td>
                         <td>{{$item->created_at->format('d-m-Y')}}</td>
+                        <td>
+                            <form action="{{route('kartu.destroy',$item->id)}}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <a href="{{route('kartu.edit',$item->id)}}" class="btn btn-sm btn-success">
+                                    Edit
+                                </a>
+                                {{-- <a href="{{route('kartu.show',$item->id)}}" class="btn btn-sm btn-warning">
+                                    Show
+                                </a> --}}
+
+                                <a href="{{route('kartu.destroy',$item->id)}}" class="btn btn-sm btn-danger" type="submit"
+                                    data-confirm-delete="true">
+                                    Delete
+                                </a>
+                            </form>
+                        </td>
                     </tr>
                 </tbody>
                 @endforeach

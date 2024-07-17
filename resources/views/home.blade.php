@@ -123,9 +123,13 @@
                                                             @method('DELETE')
                                                             @csrf
                                                             <a href="{{route('kartu.destroy',$item->id)}}"
-                                                                class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                                class="btn btn-link text-danger text-gradient px-2 mb-0"
                                                                 type="submit" data-confirm-delete="true">
                                                                 <i class="far fa-trash-alt me-2"></i>
+                                                            </a>
+                                                            <a href="{{route('kartu.edit',$item->id)}}"
+                                                                class="btn btn-link text-info text-gradient px-2 mb-0">
+                                                                <i class="far fa-edit me-2"></i>
                                                             </a>
                                                         </form>
                                                     </div>
@@ -147,24 +151,26 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h5>Total Saldo</h5>
-                                        <h4><b>@currency($saldo)</b></h4>
+                                        <h6>Total Saldo</h6>
+                                        <h5><b>@currency($saldo)</b></h5>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="btn bg-gradient-success" href="{{ route('pemasukan.create') }}">Pemasukan</a>
+                                        <a class="btn bg-gradient-success"
+                                            href="{{ route('pemasukan.create') }}">Pemasukan</a>
                                     </div>
                                     <div class="col-md-3">
-                                        <a class="btn bg-gradient-warning" href="{{ route('pengeluaran.create') }}">Pengeluaran</a>
+                                        <a class="btn bg-gradient-warning"
+                                            href="{{ route('pengeluaran.create') }}">Pengeluaran</a>
                                     </div>
                                 </div>
                                 <div class="row mt-4">
                                     <div class="col-md-3">
-                                        <h5>Pemasukan</h5>
-                                        <h4><b>@currency($total_pemasukan)</b></h4>
+                                        <h6>Pemasukan</h6>
+                                        <h5><b>@currency($total_pemasukan)</b></h5>
                                     </div>
                                     <div class="col-md-3">
-                                        <h5>Pengeluaran</h5>
-                                        <h4><b>@currency($total_pengeluaran)</b></h4>
+                                        <h6>Pengeluaran</h6>
+                                        <h5><b>@currency($total_pengeluaran)</b></h5>
                                     </div>
                                 </div>
                             </div>
@@ -175,13 +181,13 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card p-4">
-                <div class="card-header bg-transparent">
+            <div class="card">
+                <div class="card-header">
                     <h4><b>Statistik</b></h4>
                 </div>
                 <div class="card-body">
                     <div class="chart">
-                        <canvas id="myChart"></canvas>
+                        <canvas id="myChart" height="180px"></canvas>
                     </div>
                 </div>
             </div>
@@ -234,4 +240,34 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: {{ json_encode($chartData['labels']) }},
+                    datasets: [{
+                        label: 'Pemasukan',
+                        data: {{ json_encode($chartData['pemasukan']) }},
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Pengeluaran',
+                        data: {{ json_encode($chartData['pengeluaran']) }},
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+</script>
 @endsection

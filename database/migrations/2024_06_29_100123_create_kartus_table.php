@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nama_kartu');
             $table->string('total')->nullable()->default(0);
             $table->string('nomor');
+            // $table->unsignedBigInteger('id_user')->nullable();
+            // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

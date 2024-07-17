@@ -22,7 +22,7 @@ class AdminController extends Controller
     {
         $user = User::all();
         // $kartu = Kartu::all();
-        return view('user.index', compact('user'));
+        return view('admin.index', compact('user'));
 
     }
 

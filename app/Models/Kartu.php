@@ -17,4 +17,5 @@ class Kartu extends Model
     {
         return $this->hasMany(Kartu::class, 'id_kartu');
     }
+
 }

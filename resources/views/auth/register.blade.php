@@ -133,16 +133,7 @@
                                             name="password_confirmation" required autocomplete="new-password">
                                     </div>
                                 </div>
-
-                                <div class="form-check form-check-info text-start ps-0">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                                        checked>
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        I agree the <a href="javascript:;" class="text-dark font-weight-bolder">Terms
-                                            and Conditions</a>
-                                    </label>
-                                </div>
-                                <div class="text-center">
+                                <div class="text-center mt-4">
                                     <button type="submit" class="btn btn-info">
                                         {{ __('Register') }}
                                     </button>
